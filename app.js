@@ -1,6 +1,11 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 const articleRoute = require('./routes/articles');
+
+mongoose.connect('mongodb://localhost:27017/blog', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -21,7 +26,7 @@ app.get('/', (req, res) => {
             createdAt: new Date()
         }
     ];
-    res.render('index', { articles: articles });
+    res.render('articles/index', { articles: articles });
 });
 
 
